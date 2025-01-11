@@ -28,4 +28,4 @@ public class WeatherForecastController : ControllerBase
         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
     }).ToArray();
 }
-}
+
