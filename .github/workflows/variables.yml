@@ -1,4 +1,4 @@
-name: Print Values
+name: Print Variable Values
 
 on:
   workflow_dispatch:
@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print SOME_VALUE
+      - name: Print using runner's shell specific syntax
         run: echo "the value of SOME_VALUE is $SOME_VALUE"
 
-      - name: Print SOME_VALUE with full syntax
+      - name: Print using Context
         run: echo "Again, the value of SOME_VALUE is ${{env.SOME_VALUE}}". 
         
