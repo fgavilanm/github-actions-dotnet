@@ -48,6 +48,7 @@ jobs:
     name: Deploy Dev
     runs-on: ubuntu-latest
     needs: build # We make sure this job waits for the "build" job
+    environment: dev
 
     steps:
       - name: download artifact
@@ -68,4 +69,31 @@ jobs:
         with: 
           app-name: app-dometrain-github-actions-fgavilan-dev 
           package: artifacts/
+
+  deploy-prod:
+    name: Deploy Pro
+    runs-on: ubuntu-latest
+    needs: deploy-dev 
+    environment: prod
+
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dometrain-artifact
+          path: artifacts/
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+      - name: 'Deploy to Azure App Srevice Name'
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: app-dometrain-github-actions-fgavilan-prod 
+          package: artifacts/
+      
       
