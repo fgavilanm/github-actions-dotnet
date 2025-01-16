@@ -47,9 +47,12 @@ jobs:
   deploy-dev:
     name: Deploy Dev
     needs: build # We make sure this job waits for the "build" job
-    uses: fgavilanm/github-actions-reusable/.github/workflows/step-deploy-web-app-azure.yml@main #Instead of ./.github/workflows/deploy-to-azure.yml
+    uses: ./.github/workflows/deploy-to-azure.yml
     with:
-      env: prod
+      env: dev
+      resource_group_name: rg-dometrain-dev
+      app_service_name: app-dometrain-github-actions-fgavilan-dev
+      app_service_slot_name: myslot
     secrets: inherit
 
 
@@ -59,6 +62,9 @@ jobs:
     uses: ./.github/workflows/deploy-to-azure.yml 
     with:
       env: prod
+      resource_group_name: rg-dometrain-prod
+      app_service_name: app-dometrain-github-actions-fgavilan-prod
+      app_service_slot_name: myslot
     secrets: inherit
 
       
