@@ -29,6 +29,12 @@ jobs:
         environment: ${{ inputs.env }}
 
         steps:
+
+             #This step here is to get access to the file "main.bicep" that is in this repo because we will use it later
+             #If the file is not here or is outdated we will fail the "Run Bicep" Step that will come later.
+            - name: Checkout repository
+              uses: actions/checkout@v4 
+            
             - name: download artifact
               uses: actions/download-artifact@v4
               with:
