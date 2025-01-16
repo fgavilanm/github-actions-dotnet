@@ -47,7 +47,7 @@ jobs:
   deploy-dev:
     name: Deploy Dev
     needs: build # We make sure this job waits for the "build" job
-    uses: ./.github/workflows/deploy-to-azure.yml 
+    uses: fgavilanm/github-actions-reusable/.github/workflows/step-deploy-web-app-azure.yml@main #Instead of ./.github/workflows/deploy-to-azure.yml
     with:
       env: prod
     secrets: inherit
